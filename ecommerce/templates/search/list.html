@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <p>Search {{ query }}</p>
+  <div class="row">
+    {% for product in products %}
+      <div class="col-4">
+      <div class="card">
+      {% if product.image %}
+          <img src="{{ product.image.url }}" class="card-img-top" alt="...">
+      {% endif %}
+        <div class="card-body">
+          <h5 class="card-title">{{ product.title }}</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <a href="{{ product.get_absolute_url }}" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}
