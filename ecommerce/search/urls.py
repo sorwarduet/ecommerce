@@ -1,6 +1,6 @@
 from django.urls import path
 
-from search.views import (
+from ecommerce.search.views import (
     ProductSearchView,
 
 
@@ -8,6 +8,6 @@ from search.views import (
 
 app_name = "search"
 urlpatterns = [
-    path("", ProductSearchView.as_view(), name="list"),
+    path("", ProductSearchView.as_view(), name="query"),
 
 ]

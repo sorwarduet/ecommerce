@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+  {% include 'search/snippets/search-form.html' %}
+
   <p>Search {{ query }}</p>
   <div class="row">
     {% for product in products %}

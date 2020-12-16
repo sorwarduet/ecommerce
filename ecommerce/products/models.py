@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Q
 from django.template.defaultfilters import slugify
 from .utils import generate_unique_slug
 from django.shortcuts import reverse
@@ -13,6 +14,10 @@ class ProductQuerySet(models.QuerySet):
     def featured(self):
         return self.filter(featured=True)
 
+    def search(self,query):
+        lookup = Q(title__icontains=query)| Q(description__icontains=query)
+        return self.filter(lookup).distinct()
+
 
 class ProductManager(models.Manager):
     def get_queryset(self):
@@ -23,6 +28,9 @@ class ProductManager(models.Manager):
 
     def featured(self):
         return self.get_queryset().featured()
+
+    def search(self, query):
+        return self.get_queryset().active().search(query)
 
 
 class Product(models.Model):
