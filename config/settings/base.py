@@ -84,7 +84,9 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     "ecommerce.users.apps.UsersConfig",
     "ecommerce.products.apps.ProductsConfig",
-    "ecommerce.search.apps.SearchConfig"
+    "ecommerce.search.apps.SearchConfig",
+    "ecommerce.tags.apps.TagsConfig",
+    "ecommerce.carts.apps.CartsConfig"
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

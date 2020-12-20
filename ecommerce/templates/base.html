@@ -14,10 +14,9 @@
 
       <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
 
-
-
     <![endif]-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" href="{% static 'images/favicons/favicon.ico' %}">
 
     {% block css %}
@@ -48,6 +47,9 @@
             <li class="nav-item active">
               <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
             </li>
+          <li class="nav-item ">
+              <a class="nav-link" href="{% url 'products:list' %}">Products <span class="sr-only">)</span></a>
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'about' %}">About</a>
             </li>
@@ -70,6 +72,10 @@
                 <a id="log-in-link" class="nav-link" href="{% url 'account_login' %}">{% trans "Sign In" %}</a>
               </li>
             {% endif %}
+          <li class="nav-item">
+                <a id="log-in-link" class="nav-link" href="{% url 'cart:cart' %}"> {{ request.session.cart_items }} <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+</a>
+              </li>
           </ul>
         </div>
       </nav>

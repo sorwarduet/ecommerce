@@ -15,7 +15,11 @@ class ProductQuerySet(models.QuerySet):
         return self.filter(featured=True)
 
     def search(self,query):
-        lookup = Q(title__icontains=query)| Q(description__icontains=query)
+        lookup = (Q(title__icontains=query) |
+                  Q(description__icontains=query) |
+                  Q(price__icontains=query) |
+                  Q(tag__title__icontains=query)
+                  )
         return self.filter(lookup).distinct()
 
 
@@ -36,6 +40,7 @@ class ProductManager(models.Manager):
 class Product(models.Model):
     title = models.CharField(max_length=150)
     slug = models.SlugField(unique=True, blank=True)
+    price = models.DecimalField(decimal_places=2, max_digits=20, default=30.15)
     description = models.TextField(null=True, blank=True)
     image = models.ImageField(upload_to='products/', blank=True, null=True)
     featured = models.BooleanField(default=False)
