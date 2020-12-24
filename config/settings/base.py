@@ -86,7 +86,10 @@ LOCAL_APPS = [
     "ecommerce.products.apps.ProductsConfig",
     "ecommerce.search.apps.SearchConfig",
     "ecommerce.tags.apps.TagsConfig",
-    "ecommerce.carts.apps.CartsConfig"
+    "ecommerce.carts.apps.CartsConfig",
+    "ecommerce.orders.apps.OrdersConfig",
+    "ecommerce.billing.apps.BillingConfig",
+
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

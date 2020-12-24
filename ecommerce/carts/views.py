@@ -1,6 +1,11 @@
 from django.shortcuts import render, redirect
 from .models import Cart
+from ecommerce.orders.models import Order
 from ecommerce.products.models import Product
+from allauth.account.forms import LoginForm
+from ecommerce.billing.models import BillingProfile
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -44,3 +49,28 @@ def card_update(request):
         cart_obj.products.add(product_obj)
     request.session['cart_items'] = cart_obj.products.count()
     return redirect('cart:cart')
+
+
+
+def checkout_home(request):
+    cart_obj, cart_created = Cart.objects.new_or_get(request)
+
+    if cart_created:
+        return redirect('cart:cart')
+    else:
+        order_obj, new_order_obj = Order.objects.get_or_create(cart=cart_obj)
+
+    user = request.user
+    billing_profile = None
+    form = LoginForm()
+
+    if user.is_authenticated:
+        billing_profile, billing_profile_created = BillingProfile.objects.get_or_create(user=user, email=user.email)
+
+    context = {
+        'order': order_obj,
+        'billing_profile': billing_profile,
+        'form': form,
+    }
+
+    return render(request, 'carts/checkout.html', context)

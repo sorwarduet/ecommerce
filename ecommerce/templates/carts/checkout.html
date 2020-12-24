@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  {% if not billing_profile %}
+    <p>Login</p>
+    <div class="row">
+      <div class="col-12 col-md-6">
+        {% include 'carts/form.html' with form=form redirect_field_value=request.path %}
+      </div>
+    </div>
+    <div class="col-12 col-md-12">
+          <a class="btn btn-error" href="">Guest</a>
+        </div>
+    {% else %}
+    <h2>Check out</h2>
+    <p>Cart Total: {{ order.cart.total }}</p>
+    <p>Shipping Total: {{ order.shipping_total }}</p>
+    <p>Order Total: {{ order.total }}</p>
+  {% endif %}
+
+
+{% endblock %}
